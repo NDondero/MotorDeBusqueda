@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1668689588 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<windows.h>
+	<string.h>
+	"diccionario.h"
+
+1668688478 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
+
+1668688478 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"diccionario.h"
+
