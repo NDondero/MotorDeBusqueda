@@ -1,20 +1,28 @@
 # depslib dependency file v1.0
-1668689734 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\main.c
+1668813841 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\main.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
 	<windows.h>
 	<string.h>
 	"diccionario.h"
+	"motor.h"
 
-1668803890 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
+1668813841 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1668688478 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
+1668814262 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
+	"diccionario.h"
+
+1668802736 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\motor.c
+	"motor.h"
+
+1668803919 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\motor.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<windows.h>
 	"diccionario.h"
 
