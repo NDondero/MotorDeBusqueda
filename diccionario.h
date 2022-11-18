@@ -10,5 +10,6 @@ typedef struct
 
 void generarDiccionario(char**, int*, char*);
 void cargarArchivoDiccionario(char*, int, int);
+int nuevoIdDoc(void);
 
 #endif // DICCIONARIO_H_INCLUDED

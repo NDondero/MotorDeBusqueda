@@ -32,7 +32,7 @@ void cargarArchivoDiccionario(char* diccionario, int validos, int idDOC)
     aux.idDOC = idDOC;
     aux.palabra[0] = 0;
     int j=0;
-    FILE* fp = fopen("diccionario.bin", "wb");
+    FILE* fp = fopen("diccionario.bin", "wb"); // esto eventualmente va a cambiar de modo, creo que ab sirve para crear y agregar, pero no recuerdo
     if(fp)
     {
         for(int i=0; i<validos; i++)
@@ -56,4 +56,18 @@ void cargarArchivoDiccionario(char* diccionario, int validos, int idDOC)
         }
         fclose(fp);
     }
+}
+
+int nuevoIdDoc(void)
+{
+    FILE* fp = fopen("diccionario.bin", "rb");
+    termino aux;
+    if(fp)
+    {
+        fseek(fp, sizeof(termino)*-1, SEEK_END);
+        fread(&aux, sizeof(termino),1,fp);
+        fclose(fp);
+        return aux.idDOC+1;
+    }
+    return 1;
 }
