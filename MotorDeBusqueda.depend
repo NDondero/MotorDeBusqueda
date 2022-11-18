@@ -7,7 +7,10 @@
 	<string.h>
 	"diccionario.h"
 
-1668778598 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
+1668803890 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 
 1668688478 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
 	<stdio.h>
