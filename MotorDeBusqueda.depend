@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1668813841 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\main.c
+1668884375 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\main.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
@@ -8,12 +8,13 @@
 	"diccionario.h"
 	"motor.h"
 
-1668813841 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
+1668886634 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<dirent.h>
 
-1668814262 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
+1668886283 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
 	"diccionario.h"
 
 1668802736 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\motor.c

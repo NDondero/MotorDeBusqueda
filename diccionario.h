@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 
 typedef struct
 {
@@ -11,16 +12,11 @@ typedef struct
     int pos; //incrementa palabra por palabra, y no letra por letra
 } termino;
 
-typedef struct
-{
-    char palabra[20];
-} parola;
-
-void generarDiccionario(char**, int*, char*);
-void cargarArchivoDiccionario(char*, int, int);
+void genArrDeUnDoc(char**, int*, char*);
+void cargarUnDocEnArchDicc(char*, int, int);
 int nuevoIdDoc(void);
-//parola* separarFraseEnTerminos(char* frase, int* validos);
-int Minimo(int, int);
-int Levenshtein(char*, char*);
+int extension(char*, char*);
+void genArregloDeTXTs(char*[], int*);
+void genArchDicc(void);
 
 #endif // DICCIONARIO_H_INCLUDED
