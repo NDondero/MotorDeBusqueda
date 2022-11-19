@@ -55,26 +55,6 @@ void cargarUnDocEnArchDicc(char* diccionario, int validos, int idDOC)
     }
 }
 
-int nuevoIdDoc(void)
-{
-    FILE* fp = fopen("diccionario.bin", "rb");
-    termino aux;
-    int maxID = -1;
-    if(fp)
-    {
-        while(fread(&aux, sizeof(termino),1,fp))
-        {
-            if(aux.idDOC > maxID)
-            {
-                maxID = aux.idDOC;
-            }
-        }
-        fclose(fp);
-        return maxID+1;
-    }
-    return 1;
-}
-
 int extension(char* archivo, char* tipo) // extension("try.txt", ".txt")
 {
     char *ext = strrchr(archivo, '.');

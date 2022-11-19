@@ -33,11 +33,8 @@
 		</Compiler>
 		<Unit filename="diccionario.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="diccionario.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="diccionario.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -45,6 +42,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="motor.h" />
+		<Unit filename="operacionesDeUsuario.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="operacionesDeUsuario.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
