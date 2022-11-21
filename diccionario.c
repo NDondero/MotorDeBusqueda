@@ -108,8 +108,10 @@ void genArchDicc(void)
     {
         genArrDeUnDoc(&dicc, &validosDicc, arrTXTs[i]);
         cargarUnDocEnArchDicc(dicc, validosDicc, i+1);
+        free(arrTXTs[i]);
+        arrTXTs[i] = NULL; // no se vuelve a acceder a este puntero
         free(dicc);
-        dicc = NULL;
+        dicc = NULL; // este puntero se reutiliza
     }
 }
 

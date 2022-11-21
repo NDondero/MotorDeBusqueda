@@ -14,7 +14,11 @@
 	<string.h>
 	<dirent.h>
 
+<<<<<<< HEAD
 1668957685 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
+=======
+1668952411 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
+>>>>>>> f64a574adf99d0efefcb50c8c97324617d724c0b
 	"diccionario.h"
 
 1668802736 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\motor.c
