@@ -56,7 +56,3 @@ dkms.conf
 # generated directories
 bin/
 obj/
-*.layout
-*.depend
-*.exe
-*.o

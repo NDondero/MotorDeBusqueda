@@ -22,7 +22,6 @@ int main()
     }*/
     genArchDicc();
     //mostrarDiccionario();
-    printf("ello\n");
 
     return 0;
 }
