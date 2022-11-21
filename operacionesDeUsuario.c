@@ -72,17 +72,11 @@ void buscarMasDeUnTermino(nodoA* motor, char* palabras, int idDOC, int validos)
 }
 
 /// 4.
-void separarFrase(char* fraseSeparada[], char* frase, int* validos) // deberia cambiar a matriz estatica?
+void separarFrase(char fraseSeparada[][20], char* frase, int* validos)
 {
     int i=0;
     int j=0;
     int k=0;
-    while(i<10)
-    {
-        fraseSeparada[i] = (char*)malloc(sizeof(char)*20); // no olvidar liberar
-        i++;
-    }
-    i=0;
     while(i<(*validos) && j<10 && k<20)
     {
         if((frase[i]>= 65 && frase[i]<= 90) || (frase[i]>= 97 && frase[i]<= 122))
@@ -98,14 +92,8 @@ void separarFrase(char* fraseSeparada[], char* frase, int* validos) // deberia c
         }
         i++;
     }
-    if((j == 10 && i < (*validos)) || (k == 20 && fraseSeparada[j][k-1] != 0)) // caso bizarro?
+    if((j == 10 && i < (*validos)) || (k == 20 && fraseSeparada[j][k-1] != 0))
     {
-        i=0;
-        while(i<10)
-        {
-            free(fraseSeparada[i]);
-            fraseSeparada[i] = NULL;
-        }
         j=0;
     }
     *validos = j;
@@ -124,7 +112,7 @@ int ocurrenciaContigua(nodoT* listaOcurrencias, int pos, int desplazamiento)
     return 0;
 }
 
-int fraseRelativaAOcurrencia(nodoA* motor, char* fraseSeparada[], int validos, int pos)
+int fraseRelativaAOcurrencia(nodoA* motor, char fraseSeparada[][20], int validos, int pos)
 {
     int i=1; // 0 es la primer palabra, representada en pos
     nodoA* palabraSiguiente;
@@ -142,16 +130,15 @@ int fraseRelativaAOcurrencia(nodoA* motor, char* fraseSeparada[], int validos, i
 
 int buscarFrase(nodoA* motor, char* frase, int* validos, nodoT* ocurrencia)
 {
-    char* fraseSeparada[10];
+    char fraseSeparada[10][20];
     separarFrase(fraseSeparada, frase, validos);
     nodoA* primerPalabra = NULL;
-    if(fraseSeparada[0] != NULL)
+    if((*validos)>0)
     {
         primerPalabra = existePalabra(motor, fraseSeparada[0]);
     }
-    else
+    else if(!primerPalabra)
     {
-        // liberar fraseSeparada
         return -1; // no se pudo separar la frase o la primer palabra no existe
     }
     ocurrencia = primerPalabra->ocurrencias;
@@ -165,4 +152,5 @@ int buscarFrase(nodoA* motor, char* frase, int* validos, nodoT* ocurrencia)
         ocurrencia = ocurrencia->sig;
     }
     return 0; // si el control llega aca, es porque la frase contiene una sola palabra y esta en el arbol
+    // devolvera la ultima ocurrencia de la palabra
 }

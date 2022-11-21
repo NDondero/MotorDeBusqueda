@@ -12,45 +12,26 @@
 
 int main()
 {
-    /*char frase[100];
-    gets(frase);
-    int validosFrase = strlen(frase);
-    parola* arrFrase = separarFraseEnTerminos(frase, &validosFrase);
-    for(int i=0; i<validos; i++)
-    {
-        printf("%s\n", arrFrase[i].palabra);
-    }*/
+    //char frase[100];
     genArchDicc();
     //mostrarDiccionario();
+    nodoA* motor;
+    //cargaDatos(&motor);
+    termino hola;
+    hola.idDOC = 1;
+    hola.pos = 1;
+    gets(hola.palabra);
+    /*motor = crearNodoMotor(hola);
+    //insertarNodoYPalabra(&motor, hola);
+    ;*/
+
+
+    /*printf("frase o termino: ");
+    gets(frase);
+    buscarTerminoEnDocumento(motor, frase, 4);*/
 
     return 0;
 }
-
-/*parola* separarFraseEnTerminos(char* frase, int* validos)
-{
-    parola arr[10];
-    int i=0;
-    int j=0;
-    int k=0;
-    while(i<(*validos) && j<10)
-    {
-        if((frase[i]>= 65 && frase[i]<= 90) || (frase[i]>= 97 && frase[i]<= 122))
-        {
-            arr[j].palabra[k] = frase[i];
-            k++;
-        }
-        else
-        {
-            arr[j].palabra[k] = 0;
-            k=0;
-            j++;
-        }
-        i++;
-    }
-    *validos = j;
-
-    return arr;
-}*/
 
 /*int Minimo(int a, int b)
 {

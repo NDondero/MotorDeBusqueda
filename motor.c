@@ -35,7 +35,27 @@ nodoA* existePalabra(nodoA* arbol, char* palabra)
 
 void insertarPalabra(nodoT** listaPalabras,int idDOC, int pos)
 {
-    if(!(*listaPalabras) || (*listaPalabras)->idDOC>idDOC)
+    nodoT* nueva = crearNodoPalabra(idDOC, pos);
+    nodoT* seg, *ant;
+    if(!(*listaPalabras))
+    {
+        nueva->sig = *listaPalabras;
+        *listaPalabras = nueva;
+    }
+    else
+    {
+        ant = *listaPalabras;
+        seg = (*listaPalabras)->sig;
+        while(seg && seg->idDOC < idDOC && seg->pos < pos)
+        {
+            ant = seg;
+            seg = seg->sig;
+        }
+        ant->sig = nueva;
+        nueva->sig = seg;
+    }
+
+    /*if(!(*listaPalabras) || (*listaPalabras)->idDOC>idDOC)
     {
         nodoT* nueva = crearNodoPalabra(idDOC,pos);
         nueva->sig = *listaPalabras;
@@ -43,8 +63,8 @@ void insertarPalabra(nodoT** listaPalabras,int idDOC, int pos)
     }
     else
     {
-        insertarPalabra(&(*listaPalabras)->sig,idDOC,pos);
-    }
+        insertarPalabra(&((*listaPalabras)->sig),idDOC,pos);
+    }*/
 }
 
 nodoA* crearNodoMotor (termino aux)
@@ -63,16 +83,17 @@ void insertarNodoYPalabra(nodoA** arbol,termino aux)
 {
     if(!(*arbol))
     {
-        nodoA* nuevo = crearNodoMotor(aux);
-        *arbol = nuevo;
+        /*nodoA* nuevo = crearNodoMotor(aux);
+        *arbol = nuevo;*/
+        *arbol = crearNodoMotor(aux);
     }
     else if (strcmpi((*arbol)->palabra,aux.palabra)>0)
     {
-        insertarNodoYPalabra(&(*arbol)->izq,aux);
+        insertarNodoYPalabra(&((*arbol)->izq),aux);
     }
     else
     {
-        insertarNodoYPalabra(&(*arbol)->der,aux);
+        insertarNodoYPalabra(&((*arbol)->der),aux);
     }
 }
 
@@ -80,21 +101,21 @@ void cargaDatos(nodoA** motor)
 {
     FILE* fp = fopen("diccionario.bin","rb");
     termino aux;
+    nodoA* existe;
     if(fp)
     {
-
         while(fread(&aux,sizeof(termino),1,fp)>0)
         {
-
-            nodoA* existe = existePalabra((*motor),aux.palabra);
+            existe = existePalabra((*motor),aux.palabra);
             if(existe)
             {
+                printf("algo? ");
                 insertarPalabra(&existe->ocurrencias,aux.idDOC,aux.pos);
                 (existe->frecuencia)++;
             }
             else
             {
-
+                printf("no existe ");
                 insertarNodoYPalabra(motor,aux);
             }
         }
