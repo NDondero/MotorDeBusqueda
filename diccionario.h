@@ -15,7 +15,7 @@ typedef struct
 void genArrDeUnDoc(char**, int*, char*);
 void cargarUnDocEnArchDicc(char*, int, int);
 int extension(char*, char*);
-void genArregloDeTXTs(char*[], int*);
+void genArregloDeTXTs(char[][20], int*);
 void genArchDicc(void);
 void mostrarDiccionario(void);
 

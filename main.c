@@ -8,16 +8,23 @@
 
 int main()
 {
-    /*char frase[100];
-    gets(frase);
-    int validosFrase = strlen(frase);
-    parola* arrFrase = separarFraseEnTerminos(frase, &validosFrase);
-    for(int i=0; i<validos; i++)
-    {
-        printf("%s\n", arrFrase[i].palabra);
-    }*/
+    //char frase[100];
     genArchDicc();
     //mostrarDiccionario();
+    nodoA* motor;
+    //cargaDatos(&motor);
+    termino hola;
+    hola.idDOC = 1;
+    hola.pos = 1;
+    gets(hola.palabra);
+    /*motor = crearNodoMotor(hola);
+    //insertarNodoYPalabra(&motor, hola);
+    ;*/
+
+
+    /*printf("frase o termino: ");
+    gets(frase);
+    buscarTerminoEnDocumento(motor, frase, 4);*/
 
     return 0;
 }

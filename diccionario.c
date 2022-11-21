@@ -68,7 +68,7 @@ int extension(char* archivo, char* tipo) // extension("try.txt", ".txt")
     return 0;
 }
 
-void genArregloDeTXTs(char* arr[], int* validos)
+void genArregloDeTXTs(char mat[][20], int* validos)
 {
     DIR* d;
     struct dirent* dir;
@@ -79,10 +79,10 @@ void genArregloDeTXTs(char* arr[], int* validos)
         {
             if(extension(dir->d_name, ".txt"))
             {
-                arr[*validos] = (char*)malloc(sizeof(char)*20); // no olvidar liberar
-                if(arr[*validos] != NULL)
+
+                if(mat[*validos] != NULL)
                 {
-                    strcpy(arr[*validos], dir->d_name);
+                    strcpy(mat[*validos], dir->d_name);
                     (*validos)++;
                 }
                 else
@@ -101,15 +101,13 @@ void genArchDicc(void)
     remove("diccionario.bin");
     char* dicc = NULL;
     int validosDicc = 0;
-    char* arrTXTs[10];
+    char arrTXTs[10][20];
     int validosTXTs = 0;
     genArregloDeTXTs(arrTXTs, &validosTXTs);
     for(int i=0; i<validosTXTs; i++)
     {
         genArrDeUnDoc(&dicc, &validosDicc, arrTXTs[i]);
         cargarUnDocEnArchDicc(dicc, validosDicc, i+1);
-        free(arrTXTs[i]);
-        arrTXTs[i] = NULL; // no se vuelve a acceder a este puntero
         free(dicc);
         dicc = NULL; // este puntero se reutiliza
     }
