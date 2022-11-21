@@ -71,7 +71,7 @@ nodoA* crearNodoMotor (termino aux)
 {
     nodoA* nuevo = (nodoA*)malloc(sizeof(nodoA));
     strcpy(nuevo->palabra,aux.palabra);
-    nuevo->der=NULL;
+    nuevo->izq=NULL;
     nuevo->der=NULL;
     nodoT* nueva = crearNodoPalabra(aux.idDOC,aux.pos);
     nuevo->ocurrencias = nueva;
@@ -83,8 +83,6 @@ void insertarNodoYPalabra(nodoA** arbol,termino aux)
 {
     if(!(*arbol))
     {
-        /*nodoA* nuevo = crearNodoMotor(aux);
-        *arbol = nuevo;*/
         *arbol = crearNodoMotor(aux);
     }
     else if (strcmpi((*arbol)->palabra,aux.palabra)>0)
@@ -109,13 +107,11 @@ void cargaDatos(nodoA** motor)
             existe = existePalabra((*motor),aux.palabra);
             if(existe)
             {
-                printf("algo? ");
-                insertarPalabra(&existe->ocurrencias,aux.idDOC,aux.pos);
+                insertarPalabra(&(existe->ocurrencias),aux.idDOC,aux.pos);
                 (existe->frecuencia)++;
             }
             else
             {
-                printf("no existe ");
                 insertarNodoYPalabra(motor,aux);
             }
         }

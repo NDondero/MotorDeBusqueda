@@ -11,12 +11,13 @@ int main()
     //char frase[100];
     genArchDicc();
     //mostrarDiccionario();
-    nodoA* motor;
-    //cargaDatos(&motor);
-    termino hola;
+    nodoA* motor = NULL;
+    cargaDatos(&motor);
+    mostrarArbol(motor);
+    /*termino hola;
     hola.idDOC = 1;
     hola.pos = 1;
-    gets(hola.palabra);
+    gets(hola.palabra);*/
     /*motor = crearNodoMotor(hola);
     //insertarNodoYPalabra(&motor, hola);
     ;*/

@@ -24,7 +24,7 @@ void genArrDeUnDoc(char** diccionario, int* validos, char* archivo) // recibe un
 
 void cargarUnDocEnArchDicc(char* diccionario, int validos, int idDOC)
 {
-    int contadorPos = 0;
+    int contadorPos = 1;
     termino aux;
     aux.idDOC = idDOC;
     for(int i=0; i<20; i++) // mal necesario
