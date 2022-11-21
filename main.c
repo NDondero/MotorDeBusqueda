@@ -6,10 +6,6 @@
 #include "diccionario.h"
 #include "motor.h"
 
-/// tengo una re idea, cuando hagamos el menu, arranca con dos opciones,
-/// el motor con las funciones de usuario y una demo que muestre todo con pausas
-/// sin mas interaccion que "presione cualquier tecla para continuar"
-
 int main()
 {
     /*char frase[100];
@@ -25,32 +21,6 @@ int main()
 
     return 0;
 }
-
-/*parola* separarFraseEnTerminos(char* frase, int* validos)
-{
-    parola arr[10];
-    int i=0;
-    int j=0;
-    int k=0;
-    while(i<(*validos) && j<10)
-    {
-        if((frase[i]>= 65 && frase[i]<= 90) || (frase[i]>= 97 && frase[i]<= 122))
-        {
-            arr[j].palabra[k] = frase[i];
-            k++;
-        }
-        else
-        {
-            arr[j].palabra[k] = 0;
-            k=0;
-            j++;
-        }
-        i++;
-    }
-    *validos = j;
-
-    return arr;
-}*/
 
 /*int Minimo(int a, int b)
 {
