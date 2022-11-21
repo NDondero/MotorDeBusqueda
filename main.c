@@ -12,7 +12,17 @@
 
 int main()
 {
-    printf("hola mundo!\n");
+    /*char frase[100];
+    gets(frase);
+    int validosFrase = strlen(frase);
+    parola* arrFrase = separarFraseEnTerminos(frase, &validosFrase);
+    for(int i=0; i<validos; i++)
+    {
+        printf("%s\n", arrFrase[i].palabra);
+    }*/
+    genArchDicc();
+    //mostrarDiccionario();
+
     return 0;
 }
 
