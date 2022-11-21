@@ -6,10 +6,6 @@
 #include "diccionario.h"
 #include "motor.h"
 
-/// tengo una re idea, cuando hagamos el menu, arranca con dos opciones,
-/// el motor con las funciones de usuario y una demo que muestre todo con pausas
-/// sin mas interaccion que "presione cualquier tecla para continuar"
-
 int main()
 {
     //char frase[100];
