@@ -113,18 +113,34 @@ void separarFrase(char* fraseSeparada[], char* frase, int* validos) // deberia c
 
 int ocurrenciaContigua(nodoT* listaOcurrencias, int pos, int desplazamiento)
 {
-    while(listaOcurrencias)
+    while(listaOcurrencias && listaOcurrencias->pos < pos + desplazamiento) // esta ordenada por pos la lista de ocurrencias
     {
-        if(listaOcurrencias->pos == pos + desplazamiento)
-        {
-            return 1;
-        }
         listaOcurrencias = listaOcurrencias->sig;
+    }
+    if(listaOcurrencias->pos == pos + desplazamiento)
+    {
+        return 1;
     }
     return 0;
 }
 
-int buscarFrase(nodoA* motor, char* frase, int* validos)
+int fraseRelativaAOcurrencia(nodoA* motor, char* fraseSeparada[], int validos, int pos)
+{
+    int i=1; // 0 es la primer palabra, representada en pos
+    nodoA* palabraSiguiente;
+    while(i<validos)
+    {
+        palabraSiguiente = existePalabra(motor, fraseSeparada[i]);
+        if(!palabraSiguiente || !ocurrenciaContigua(palabraSiguiente->ocurrencias, pos, i))
+        {
+            return 0;
+        }
+        i++;
+    }
+    return 1;
+}
+
+int buscarFrase(nodoA* motor, char* frase, int* validos, nodoT* ocurrencia)
 {
     char* fraseSeparada[10];
     separarFrase(fraseSeparada, frase, validos);
@@ -135,32 +151,18 @@ int buscarFrase(nodoA* motor, char* frase, int* validos)
     }
     else
     {
+        // liberar fraseSeparada
         return -1; // no se pudo separar la frase o la primer palabra no existe
     }
-    nodoA* palabraSiguiente = NULL;
-    nodoT* seg = primerPalabra->ocurrencias;
-    int i=1;
-    int flag = 1;
-    while(seg && i<(*validos) && flag == 1) // replantear todo el bucle y modularizar
+    ocurrencia = primerPalabra->ocurrencias;
+    while(ocurrencia)
     {
-        palabraSiguiente = existePalabra(arbol, fraseSeparada[i]);
-        if(palabraSiguiente)
+        if(fraseRelativaAOcurrencia(motor, fraseSeparada, *validos, ocurrencia->pos))
         {
-            if(!ocurrenciaContigua(palabraSiguiente->ocurrencias, seg->pos, i))
-            {
-                seg = seg->sig;
-            }
+            // liberar fraseSeparada
+            return 1; // se encuentra una frase con exito
         }
-        i++;
+        ocurrencia = ocurrencia->sig;
     }
-
-
-  /*while(frase)
-  {
-      nodoA
-      while(ocurrencia)
-      {
-          palabra en id -> posi
-      }
-  }*/
+    return 0; // si el control llega aca, es porque la frase contiene una sola palabra y esta en el arbol
 }
