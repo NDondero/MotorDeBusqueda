@@ -56,7 +56,7 @@ dkms.conf
 # generated directories
 bin/
 obj/
-MotorDeBusqueda.layout
-MotorDeBusqueda.depend
 *.layout
 *.depend
+*.exe
+*.o
