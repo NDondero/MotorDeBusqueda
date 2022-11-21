@@ -17,5 +17,6 @@ void cargarUnDocEnArchDicc(char*, int, int);
 int extension(char*, char*);
 void genArregloDeTXTs(char*[], int*);
 void genArchDicc(void);
+void mostrarDiccionario(void);
 
 #endif // DICCIONARIO_H_INCLUDED
