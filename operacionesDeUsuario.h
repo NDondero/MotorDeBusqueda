@@ -9,6 +9,7 @@ int frecuenciaPorDocumento(nodoT*, int);
 void buscarTerminoEnDocumento(nodoA*, char*, int);
 void buscarTerminoEnDocumentos(nodoA*, char*, int*, int);
 void buscarMasDeUnTermino(nodoA*, char*, int, int);
-void buscarFrase(nodoA*, char*, int);
+void separarFrase(char*[], char*, int*);
+void buscarFrase(nodoA*, char*, int*);
 
 #endif // OPERACIONESDEUSUARIO_H_INCLUDED

@@ -27,14 +27,17 @@ void cargarUnDocEnArchDicc(char* diccionario, int validos, int idDOC)
     int contadorPos = 0;
     termino aux;
     aux.idDOC = idDOC;
-    aux.palabra[0] = 0;
+    for(int i=0; i<20; i++) // mal necesario
+    {
+        aux.palabra[i] = 0;
+    }
     int j=0;
     FILE* fp = fopen("diccionario.bin", "ab");
     if(fp)
     {
         for(int i=0; i<validos; i++)
         {
-            if((diccionario[i]>= 65 && diccionario[i]< 91) || (diccionario[i]>= 97 && diccionario[i]< 123))
+            if((diccionario[i]>= 65 && diccionario[i]<= 90) || (diccionario[i]>= 97 && diccionario[i]<= 122))
             {
                 aux.palabra[j] = diccionario[i];
                 j++;
@@ -107,5 +110,23 @@ void genArchDicc(void)
         cargarUnDocEnArchDicc(dicc, validosDicc, i+1);
         free(dicc);
         dicc = NULL;
+    }
+}
+
+void mostrarDiccionario(void)
+{
+    FILE* fp = fopen("diccionario.bin", "rb");
+    termino aux;
+
+    if(fp)
+    {
+        while(fread(&aux, sizeof(termino),1,fp))
+        {
+            printf("%s\n", aux.palabra);
+            printf("idDOC: %i\n", aux.idDOC);
+            printf("pos: %i\n", aux.pos);
+            printf("----------\n");
+        }
+        fclose(fp);
     }
 }

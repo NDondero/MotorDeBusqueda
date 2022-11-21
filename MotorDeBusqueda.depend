@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1668887355 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\main.c
+1668985716 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\main.c
 	<stdio.h>
 	<stdlib.h>
 	<locale.h>
@@ -8,13 +8,13 @@
 	"diccionario.h"
 	"motor.h"
 
-1668888164 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
+1668956450 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<dirent.h>
 
-1668952566 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
+1668957685 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\diccionario.c
 	"diccionario.h"
 
 1668802736 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\motor.c
@@ -27,5 +27,12 @@
 	<windows.h>
 	"diccionario.h"
 
-1668887355 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\operacionesdeusuario.c
+1668985795 source:c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\operacionesdeusuario.c
+	"operacionesDeUsuario.h"
+
+1668984520 c:\users\ndond\onedrive\utn\2docuatri\prog y lab\motordebusqueda\operacionesdeusuario.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"motor.h"
 
