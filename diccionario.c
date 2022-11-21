@@ -75,7 +75,7 @@ void genArregloDeTXTs(char* arr[], int* validos)
     d = opendir(".");
     if(d)
     {
-        while((dir = readdir(d))!= NULL && (*validos) < 9)
+        while((dir = readdir(d))!= NULL && (*validos) < 10)
         {
             if(extension(dir->d_name, ".txt"))
             {
