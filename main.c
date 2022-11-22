@@ -5,27 +5,29 @@
 #include <string.h>
 #include "diccionario.h"
 #include "motor.h"
+#include "operacionesDeUsuario.h"
 
 int main()
 {
-    //char frase[100];
+    char frase[100];
     genArchDicc();
     //mostrarDiccionario();
     nodoA* motor = NULL;
     cargaDatos(&motor);
     mostrarArbol(motor);
-    /*termino hola;
-    hola.idDOC = 1;
-    hola.pos = 1;
-    gets(hola.palabra);*/
-    /*motor = crearNodoMotor(hola);
-    //insertarNodoYPalabra(&motor, hola);
-    ;*/
 
-
-    /*printf("frase o termino: ");
+    printf("frase o termino: ");
     gets(frase);
-    buscarTerminoEnDocumento(motor, frase, 4);*/
+    //int docs[] = {2,3};
+    //buscarTerminoEnDocumento(motor, frase, 1);
+    //buscarTerminoEnDocumentos(motor, frase, docs, 2);
+    //buscarMasDeUnTermino(motor, frase, 1, strlen(frase));
+    /*nodoT* ocurrencia = NULL;
+    if(buscarFrase(motor, frase, strlen(frase), &ocurrencia) == 1)
+    {
+        printf("se encontro en el documento %i en la posicion %i\n", ocurrencia->idDOC,ocurrencia->pos);
+    }*/
+
 
     return 0;
 }
