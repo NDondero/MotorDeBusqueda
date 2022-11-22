@@ -16,8 +16,8 @@ int main()
     cargaDatos(&motor);
     mostrarArbol(motor);
 
-    printf("frase o termino: ");
-    gets(frase);
+    //printf("frase o termino: ");
+    //gets(frase);
     //int docs[] = {2,3};
     //buscarTerminoEnDocumento(motor, frase, 1);
     //buscarTerminoEnDocumentos(motor, frase, docs, 2);
@@ -27,8 +27,11 @@ int main()
     {
         printf("se encontro en el documento %i en la posicion %i\n", ocurrencia->idDOC,ocurrencia->pos);
     }*/
-
-
+    nodoA* mayorFrecuencia = palabraMayorFrecuencia(motor);
+    if(mayorFrecuencia)
+    {
+        printf("la palabra \"%s\" es la mas frecuente con %i ocurrencias\n", mayorFrecuencia->palabra, mayorFrecuencia->frecuencia);
+    }
     return 0;
 }
 

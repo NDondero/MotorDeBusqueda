@@ -171,3 +171,45 @@ por lo que es conveniente que venga inicializado en NULL. 0 si la frase contenia
 y el nodoT ocurrencia contendra la ultima ocurrencia de esa palabra, esto es la ultima posicion encontrada
 del documento con mayor ID. 1 si la frase se encuentra de manera contigua en algun documento
 y el nodoT ocurrencia contendra la posicion de la primer palabra de la frase en el documento en el que aparece **/
+
+/// 5. Buscar la palabra de más frecuencia que aparece en un doc.
+nodoA* palabraMayorFrecuencia(nodoA* motor)
+{
+    nodoA* mayorIzq, * mayorDer;
+    if(motor)
+    {
+        mayorIzq = palabraMayorFrecuencia(motor->izq);
+        mayorDer = palabraMayorFrecuencia(motor->der);
+        if(mayorIzq && mayorDer) // grado 2
+        {
+            if(mayorIzq->frecuencia < motor->frecuencia && mayorDer->frecuencia < motor->frecuencia)
+            {
+                return motor;
+            }
+            else
+            {
+                if(mayorIzq->frecuencia < mayorDer->frecuencia)
+                {
+                    return mayorDer;
+                }
+                return mayorIzq;
+            }
+        }
+        else if(mayorIzq) // grado 1
+        {
+            if(mayorIzq->frecuencia > motor->frecuencia)
+            {
+                return mayorIzq;
+            }
+        }
+        else if(mayorDer)
+        {
+            if(mayorDer->frecuencia > motor->frecuencia)
+            {
+                return mayorDer;
+            }
+        }
+        return motor; // grado 0
+    }
+    return NULL;
+}

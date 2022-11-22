@@ -13,5 +13,6 @@ void buscarMasDeUnTermino(nodoA*, char*, int, int);
 int ocurrenciaContigua(nodoT*, int, int);
 int fraseRelativaAOcurrencia(nodoA*, char[][20], int, int);
 int buscarFrase(nodoA*, char*, int, nodoT**);
+nodoA* palabraMayorFrecuencia(nodoA* motor);
 
 #endif // OPERACIONESDEUSUARIO_H_INCLUDED
