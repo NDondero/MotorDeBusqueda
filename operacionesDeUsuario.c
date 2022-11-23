@@ -111,27 +111,27 @@ void buscarMasDeUnTermino(nodoA* motor, char* palabras, int idDOC, int validos)
 tantas veces como palabras contenga la frase **/
 
 /// 4. Buscar una frase completa (las palabras deben estar contiguas en alguno de los documentos).
-int ocurrenciaContigua(nodoT* listaOcurrencias, int pos, int desplazamiento)
+int ocurrenciaContigua(nodoT* listaOcurrencias, int idDOC, int pos, int desplazamiento)
 {
-    while(listaOcurrencias && listaOcurrencias->pos < pos + desplazamiento) // esta ordenada por pos la lista de ocurrencias
+    while(listaOcurrencias && listaOcurrencias->idDOC <= idDOC && listaOcurrencias->pos < pos + desplazamiento)
     {
         listaOcurrencias = listaOcurrencias->sig;
     }
-    if(listaOcurrencias->pos == pos + desplazamiento)
+    if(listaOcurrencias->idDOC == idDOC && listaOcurrencias->pos == pos + desplazamiento)
     {
         return 1;
     }
     return 0;
 }
 
-int fraseRelativaAOcurrencia(nodoA* motor, char fraseSeparada[][20], int validos, int pos)
+int fraseRelativaAOcurrencia(nodoA* motor, char fraseSeparada[][20], int validos, int idDOC, int pos)
 {
     int i=1; // 0 es la primer palabra, representada en pos
     nodoA* palabraSiguiente;
     while(i<validos)
     {
         palabraSiguiente = existePalabra(motor, fraseSeparada[i]);
-        if(!palabraSiguiente || !ocurrenciaContigua(palabraSiguiente->ocurrencias, pos, i))
+        if(!palabraSiguiente || !ocurrenciaContigua(palabraSiguiente->ocurrencias, idDOC, pos, i))
         {
             return 0;
         }
@@ -156,7 +156,7 @@ int buscarFrase(nodoA* motor, char* frase, int validos, nodoT** ocurrencia)
     *ocurrencia = primerPalabra->ocurrencias;
     while(*ocurrencia)
     {
-        if(fraseRelativaAOcurrencia(motor, fraseSeparada, validos, (*ocurrencia)->pos))
+        if(fraseRelativaAOcurrencia(motor, fraseSeparada, validos, (*ocurrencia)->idDOC, (*ocurrencia)->pos))
         {
             return 1; // se encuentra una frase con exito
         }
