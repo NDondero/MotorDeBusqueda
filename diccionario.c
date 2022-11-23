@@ -96,15 +96,13 @@ void genArregloDeTXTs(char mat[][20], int* validos)
     }
 }
 
-void genArchDicc(void)
+void genArchDicc(char arrTXTs[][20], int* validosTXTs)
 {
     remove("diccionario.bin");
     char* dicc = NULL;
     int validosDicc = 0;
-    char arrTXTs[10][20];
-    int validosTXTs = 0;
-    genArregloDeTXTs(arrTXTs, &validosTXTs);
-    for(int i=0; i<validosTXTs; i++)
+    genArregloDeTXTs(arrTXTs, validosTXTs);
+    for(int i=0; i<(*validosTXTs); i++)
     {
         genArrDeUnDoc(&dicc, &validosDicc, arrTXTs[i]);
         cargarUnDocEnArchDicc(dicc, validosDicc, i+1);
