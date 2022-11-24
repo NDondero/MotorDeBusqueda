@@ -46,7 +46,7 @@ void insertarPalabra(nodoT** listaPalabras,int idDOC, int pos)
     {
         ant = *listaPalabras;
         seg = (*listaPalabras)->sig;
-        while(seg && seg->idDOC < idDOC && seg->pos < pos)
+        while(seg && seg->idDOC <= idDOC && seg->pos < pos)
         {
             ant = seg;
             seg = seg->sig;
