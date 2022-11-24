@@ -5,6 +5,12 @@
 #include <string.h>
 #include <dirent.h>
 
+/**
+Esta libreria se encarga de leer el directorio en el que se encuentra el proyecto, produce un archivo binario de terminos basado en hasta 10 documentos de texto (.txt) llamado diccionario.bin
+es necesario enviar por parametros a la funcion genArchDicc (generar archivo diccionario) una matriz de tipo char y una variable int
+que representara las filas que contienen strings con los nombres de los documentos de texto, el orden de estos se correspondera con los idDOCs del 1 al 10
+**/
+
 typedef struct
 {
     char palabra[20];

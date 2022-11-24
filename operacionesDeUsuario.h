@@ -5,6 +5,10 @@
 #include <string.h>
 #include "motor.h"
 
+/**
+Esta libreria se encarga de contener todas las funciones que serian necesarias para que el usuario haga busquedas durante ejecucion
+**/
+
 int frecuenciaPorDocumento(nodoT*, int);
 void buscarTerminoEnDocumento(nodoA*, char*, int);
 void buscarTerminoEnDocumentos(nodoA*, char*, int*, int);

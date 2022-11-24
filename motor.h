@@ -6,6 +6,11 @@
 #include <windows.h>
 #include "diccionario.h"
 
+/**
+Esta libreria se encarga de consumir el archivo diccionario.bin y convertirlo en un arbol binario de busqueda
+es necesario invocar la funcion cargaDatos, pasandole un nodoA* inicializado en NULL como parametro
+**/
+
 typedef struct nodoT
 {
     int idDOC;
