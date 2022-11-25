@@ -26,14 +26,23 @@ int frecuenciaPorDocumento(nodoT* ocurrecias,int id)
     return cant;
 }
 
-void buscarTerminoEnDocumento(nodoA* motor, char* palabra, int id)
+void buscarTerminoEnTodosDocumentos(nodoA* motor, char* palabra, int cantIds, char textos[][20])
 {
-    nodoA* nodoPalabra = buscarPalabra(motor,palabra);
+    nodoA* nodoPalabra = existePalabra(motor,palabra);
     if(nodoPalabra)
     {
-        int cant = frecuenciaPorDocumento(nodoPalabra->ocurrencias,id);
-        printf("La palabra: %s, esta en el documento: %i %i veces\n",palabra,id,cant);
-    }else
+        for(int i=0; i<cantIds; i++)
+        {
+            int cant = frecuenciaPorDocumento(nodoPalabra->ocurrencias,i+1);
+            if(cant>0)
+            {
+                printf("La palabra: %s, esta %i veces en el documento: %s \n",palabra,cant,textos[i]);
+            }
+
+        }
+
+    }
+    else
     {
         printf("No se encontro la palabra\n");
     }
@@ -44,8 +53,12 @@ e informar cuantas veces aparece en ese documento en particular **/
 /// 2. Buscar todas las apariciones de un término en un documento y otros  (operacion and).
 void buscarTerminoEnDocumentos(nodoA* motor,char* palabra, int* idDocs, int validos)
 {
-    nodoA* nodoPalabra = buscarPalabra(motor,palabra);
-    int i=0,flag=1;
+    nodoA* nodoPalabra = existePalabra(motor,palabra);
+    int i=0,flag=0;
+    if(nodoPalabra)
+    {
+        flag =1;
+    }
     while (i<validos && flag==1 )
     {
         int frecuencias = frecuenciaPorDocumento(nodoPalabra->ocurrencias,idDocs[i]);
@@ -58,7 +71,8 @@ void buscarTerminoEnDocumentos(nodoA* motor,char* palabra, int* idDocs, int vali
     if(flag==1)
     {
         printf("Se encontro la palabra: %s, en los documentos seleccionados\n",palabra);
-    }else
+    }
+    else
     {
         printf("No se encontro la palabra en todos o alguno de los documentos\n");
     }
@@ -94,12 +108,33 @@ void separarFrase(char fraseSeparada[][20], char* frase, int* validos)
     *validos = j;
 }
 
+void buscarTerminoEnDocumento(nodoA* motor, char* palabra, int id)
+{
+    nodoA* nodoPalabra = existePalabra(motor,palabra);
+    if(nodoPalabra)
+    {
+        int cant = frecuenciaPorDocumento(nodoPalabra->ocurrencias,id);
+        if(cant>0)
+        {
+            printf("La palabra: %s, esta en el documento: %i / %i veces\n",palabra,id,cant);
+        }
+        else
+        {
+            printf("No se encontro la palabra %s\n",palabra);
+        }
+    }
+    else
+    {
+        printf("No se encontro la palabra %s\n",palabra);
+    }
+}
+
 void buscarMasDeUnTermino(nodoA* motor, char* palabras, int idDOC)
 {
     char fraseSeparada[10][20];
     int validos = 0;
     separarFrase(fraseSeparada, palabras, &validos);
-    for(int i=0;i<validos;i++)
+    for(int i=0; i<validos; i++)
     {
         buscarTerminoEnDocumento(motor,fraseSeparada[i],idDOC);
     }
@@ -108,8 +143,7 @@ void buscarMasDeUnTermino(nodoA* motor, char* palabras, int idDOC)
         printf("no se pudo buscar la frase en el documento\n");
     }
 }
-/**La funcion del punto 3 se encarga de separar una frase en palabras y repite el la funcion del punto 1
-tantas veces como palabras contenga la frase **/
+/**La funcion del punto 3 se encarga de separar una frase en palabras **/
 
 /// 4. Buscar una frase completa (las palabras deben estar contiguas en alguno de los documentos).
 int ocurrenciaContigua(nodoT* listaOcurrencias, int idDOC, int pos, int desplazamiento)
@@ -141,8 +175,9 @@ int fraseRelativaAOcurrencia(nodoA* motor, char fraseSeparada[][20], int validos
     return 1;
 }
 
-int buscarFrase(nodoA* motor, char* frase, nodoT** ocurrencia)
+nodoT* buscarFrase(nodoA* motor, char* frase)
 {
+    nodoT* ocurrencia;
     char fraseSeparada[10][20];
     int validos = 0;
     separarFrase(fraseSeparada, frase, &validos);
@@ -153,18 +188,18 @@ int buscarFrase(nodoA* motor, char* frase, nodoT** ocurrencia)
     }
     if(!primerPalabra)
     {
-        return -1; // no se pudo separar la frase o la primer palabra no existe
+        return NULL; // no se pudo separar la frase o la primer palabra no existe
     }
-    *ocurrencia = primerPalabra->ocurrencias;
-    while(*ocurrencia)
+    ocurrencia = primerPalabra->ocurrencias;
+    while(ocurrencia)
     {
-        if(fraseRelativaAOcurrencia(motor, fraseSeparada, validos, (*ocurrencia)->idDOC, (*ocurrencia)->pos))
+        if(fraseRelativaAOcurrencia(motor, fraseSeparada, validos, ocurrencia->idDOC, ocurrencia->pos))
         {
-            return 1; // se encuentra una frase con exito
+            return ocurrencia; // se encuentra una frase con exito
         }
-        *ocurrencia = (*ocurrencia)->sig;
+        ocurrencia = ocurrencia->sig;
     }
-    return 0; // *ocurrencia == NULL
+    return NULL; // *ocurrencia == NULL
 }
 /**La funcion del punto 4 se encarga de separar una frase en palabras, devolvera -1 si la frase no se pudo separar
 o la primer palabra no existe en ningun documento y no se llegara a modificar el nodoT ocurrencia,
@@ -173,43 +208,47 @@ pero la frase no, nodoT currencia sera NULL. 1 si la frase se encuentra de maner
 y el nodoT ocurrencia contendra la posicion de la primer palabra de la frase en el documento en el que aparece **/
 
 /// 5. Buscar la palabra de más frecuencia que aparece en un doc.
-nodoA* palabraMayorFrecuencia(nodoA* motor)
+nodoA* palabraMayorFrecuenciaDeUnDoc(nodoA* motor, int idDOC)
 {
-    nodoA* mayorIzq, * mayorDer;
+    nodoA* mayorIzq, * mayorDer; // estaria buscando en todo el arbol en lugar de en todas las palabras que contengan al menos una ocurrencia en el documento
+    int frecMotor, frecIzq, frecDer;
     if(motor)
     {
-        mayorIzq = palabraMayorFrecuencia(motor->izq);
-        mayorDer = palabraMayorFrecuencia(motor->der);
+        frecMotor = frecuenciaPorDocumento(motor->ocurrencias, idDOC);
+        mayorIzq = palabraMayorFrecuenciaDeUnDoc(motor->izq,idDOC);
+        mayorDer = palabraMayorFrecuenciaDeUnDoc(motor->der,idDOC);
         if(mayorIzq && mayorDer) // grado 2
         {
-            if(mayorIzq->frecuencia < motor->frecuencia && mayorDer->frecuencia < motor->frecuencia)
+            frecIzq = frecuenciaPorDocumento(mayorIzq->ocurrencias, idDOC);
+            frecDer = frecuenciaPorDocumento(mayorDer->ocurrencias, idDOC);
+            if(frecIzq < frecMotor && frecDer < frecMotor)
             {
                 return motor;
             }
-            else
+            if(frecIzq < frecDer)
             {
-                if(mayorIzq->frecuencia < mayorDer->frecuencia)
-                {
-                    return mayorDer;
-                }
-                return mayorIzq;
+                return mayorDer;
             }
+            return mayorIzq;
         }
         else if(mayorIzq) // grado 1
         {
-            if(mayorIzq->frecuencia > motor->frecuencia)
+            frecIzq = frecuenciaPorDocumento(mayorIzq->ocurrencias, idDOC);
+            if(frecIzq > frecMotor)
             {
                 return mayorIzq;
             }
         }
         else if(mayorDer)
         {
-            if(mayorDer->frecuencia > motor->frecuencia)
+            frecDer = frecuenciaPorDocumento(mayorDer->ocurrencias, idDOC);
+            if(frecDer > frecMotor)
             {
                 return mayorDer;
             }
         }
         return motor; // grado 0
+
     }
     return NULL;
 }
@@ -260,7 +299,7 @@ int Levenshtein(char *s1,char *s2)
     return(res);
 }
 
-nodoA* sugerirPalabra(nodoA* motor, char* palabra) // levenshtein <= 3 ???
+nodoA* sugerirPalabra(nodoA* motor, char* palabra) // levenshtein <=3 ???
 {
     nodoA* izqMenor, * derMenor;
     int LevMot, LevIzq, LevDer;

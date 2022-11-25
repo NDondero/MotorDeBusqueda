@@ -12,12 +12,13 @@ Esta libreria se encarga de contener todas las funciones que serian necesarias p
 int frecuenciaPorDocumento(nodoT*, int);
 void buscarTerminoEnDocumento(nodoA*, char*, int);
 void buscarTerminoEnDocumentos(nodoA*, char*, int*, int);
+void buscarTerminoEnTodosDocumentos(nodoA*, char*, int, char[][20]);
 void separarFrase(char[][20], char*, int*);
 void buscarMasDeUnTermino(nodoA*, char*, int);
 int ocurrenciaContigua(nodoT*, int, int, int);
 int fraseRelativaAOcurrencia(nodoA*, char[][20], int, int, int);
-int buscarFrase(nodoA*, char*, nodoT**);
-nodoA* palabraMayorFrecuencia(nodoA* motor);
+nodoT* buscarFrase(nodoA*, char*);
+nodoA* palabraMayorFrecuenciaDeUnDoc(nodoA* motor, int);
 int Minimo(int, int);
 int Levenshtein(char *,char *);
 nodoA* sugerirPalabra(nodoA*, char*);

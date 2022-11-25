@@ -24,5 +24,7 @@ int extension(char*, char*);
 void genArregloDeTXTs(char[][20], int*);
 void genArchDicc(char[][20], int*);
 void mostrarDiccionario(void);
+void muestraTXTs(char[][20], int);
+void preguntarIDs(int[], int*);
 
 #endif // DICCIONARIO_H_INCLUDED

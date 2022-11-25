@@ -111,7 +111,7 @@ void genArchDicc(char arrTXTs[][20], int* validosTXTs)
     }
 }
 
-void mostrarDiccionario(void)
+void mostrarDiccionario()
 {
     FILE* fp = fopen("diccionario.bin", "rb");
     termino aux;
@@ -127,4 +127,33 @@ void mostrarDiccionario(void)
         }
         fclose(fp);
     }
+}
+
+void muestraTXTs(char arrTXTs[][20], int validos)
+{
+    for(int i=0; i<validos; i++)
+    {
+        printf("Opcion %i: %s\n", i+1, arrTXTs[i]);
+    }
+    printf("\n");
+}
+
+void preguntarIDs(int idDocs[], int* validos)
+{
+    char control = 's';
+    int i=0;
+    while(i<10 && control == 's')
+    {
+        printf("ingrese id del documento: ");
+        scanf("%i", &idDocs[i]);
+        printf("desea agregar otro ID? s/n\n");
+        fflush(stdin);
+        scanf("%c", &control);
+        i++;
+    }
+    if(i == 10)
+    {
+        printf("no se pueden agregar mas IDs\n");
+    }
+    *validos = i;
 }

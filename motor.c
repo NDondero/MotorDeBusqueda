@@ -9,23 +9,23 @@ nodoT* crearNodoPalabra(int idDOC, int pos)
     return nueva;
 }
 
-nodoA* existePalabra(nodoA* arbol, char* palabra)
+nodoA* existePalabra(nodoA* motor, char* palabra)
 {
-    if(arbol)
+    if(motor)
     {
-        if(strcmpi(arbol->palabra,palabra)==0)
+        if(strcmpi(motor->palabra,palabra)==0)
         {
-            return arbol;
+            return motor;
         }
         else
         {
-            if (strcmpi(arbol->palabra,palabra)>0)
+            if (strcmpi(motor->palabra,palabra)>0)
             {
-                return existePalabra(arbol->izq,palabra);
+                return existePalabra(motor->izq,palabra);
             }
             else
             {
-                return existePalabra(arbol->der,palabra);
+                return existePalabra(motor->der,palabra);
             }
 
         }
@@ -79,19 +79,19 @@ nodoA* crearNodoMotor (termino aux)
     return nuevo;
 }
 
-void insertarNodoYPalabra(nodoA** arbol,termino aux)
+void insertarNodoYPalabra(nodoA** motor,termino aux)
 {
-    if(!(*arbol))
+    if(!(*motor))
     {
-        *arbol = crearNodoMotor(aux);
+        *motor = crearNodoMotor(aux);
     }
-    else if (strcmpi((*arbol)->palabra,aux.palabra)>0)
+    else if (strcmpi((*motor)->palabra,aux.palabra)>0)
     {
-        insertarNodoYPalabra(&((*arbol)->izq),aux);
+        insertarNodoYPalabra(&((*motor)->izq),aux);
     }
     else
     {
-        insertarNodoYPalabra(&((*arbol)->der),aux);
+        insertarNodoYPalabra(&((*motor)->der),aux);
     }
 }
 
@@ -123,50 +123,22 @@ void mostrarTermino (nodoT* lista)
 {
     while(lista)
     {
-        printf("idDoc: %i\n",lista->idDOC);
-        printf("Posicion: %i\n\n",lista->pos);
+        printf("idDoc: %i ",lista->idDOC);
+        printf("Posicion: %i\n",lista->pos);
         lista = lista->sig;
     }
 }
 
-void mostrarArbol (nodoA* arbol)
+void mostrarArbol (nodoA* motor)
 {
-    if(arbol)
+    if(motor)
     {
-        mostrarArbol(arbol->izq);
-        printf("Palabra: %s\n",arbol->palabra);
-        printf("Frecuencia: %i\n",arbol->frecuencia);
-        mostrarTermino(arbol->ocurrencias);
-        mostrarArbol(arbol->der);
+        mostrarArbol(motor->izq);
+        printf("Palabra: %s\n",motor->palabra);
+        printf("Frecuencia: %i\n",motor->frecuencia);
+        mostrarTermino(motor->ocurrencias);
+        printf("\n");
+        mostrarArbol(motor->der);
     }
 }
 
-nodoA* buscarPalabra(nodoA* arbol, char* palabra)
-{
-    if(arbol)
-    {
-        if(strcmpi(arbol->palabra,palabra)==0)
-        {
-            return arbol;
-//            char aux[2];
-//            itoa(arbol->frecuencia,aux,10);
-//            //strcat()
-//           MessageBox(NULL, arbol->palabra, "", MB_OK);
-//           MessageBox(NULL, aux, "", MB_OK);
-//           //MessageBoxA()
-        }
-        else
-        {
-            if (strcmpi(arbol->palabra,palabra)>0)
-            {
-                return buscarPalabra(arbol->izq,palabra);
-            }
-            else
-            {
-               return buscarPalabra(arbol->der,palabra);
-            }
-
-        }
-    }
-    return NULL;
-}
