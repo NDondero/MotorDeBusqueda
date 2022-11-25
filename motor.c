@@ -135,8 +135,8 @@ void mostrarArbol (nodoA* arbol)
     {
         mostrarArbol(arbol->izq);
         printf("Palabra: %s\n",arbol->palabra);
-        printf("Frecuencia: %i\n",arbol->frecuencia);
-        mostrarTermino(arbol->ocurrencias);
+        printf("Frecuencia: %i\n\n",arbol->frecuencia);
+        //mostrarTermino(arbol->ocurrencias);
         mostrarArbol(arbol->der);
     }
 }

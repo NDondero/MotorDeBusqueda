@@ -4,12 +4,11 @@ void menu()
 {
     char arrTXTs[10][20];
     int validosTXTs = 0;
-    genArchDicc(arrTXTs, &validosTXTs);
-
-    //mostrarDiccionario();
     nodoA* motor = NULL;
+
+    genArchDicc(arrTXTs, &validosTXTs);
     cargaDatos(&motor);
-    //mostrarArbol(motor);
+
     hidecursor(0);
 
     int y,x=14,opcion,salir=0;
@@ -27,30 +26,28 @@ void menu()
             color(11);
             printf("Shahoo! Search");
 
+            int j = 6;
+            while(j<=15)
+            {
+                color(0);
+                recuadro(14,j,27,3);
+                j+=3;
+            }
+
             //opciones del menu
-            gotoxy(16,7);
             color(7);
+
+            gotoxy(16,7);
             printf("Ver Textos");
-            color(0);
-            recuadro(14,6,27,3);
 
             gotoxy(16,10);
-            color(7);
             printf("Operaciones de Busqueda");
-            color(0);
-            recuadro(14,9,27,3);
 
             gotoxy(16,13);
-            color(7);
             printf("Otros");
-            color(0);
-            recuadro(14,12,27,3);
 
             gotoxy(16,16);
-            color(7);
             printf("Salir");
-            color(0);
-            recuadro(14,15,27,3);
 
             //indicador del cursor de seleccion
             color(10);
@@ -79,7 +76,7 @@ void menu()
         {
         case 6:
             system("cls");
-            menuVerArchivos(arrTXTs,validosTXTs);///opcion volver? control entrada
+            menuVerArchivos(arrTXTs,validosTXTs);
             system("pause");
             break;
         case 9:
@@ -88,60 +85,32 @@ void menu()
             break;
         case 12:
             system("cls");
-
+            menuOtros(motor);
             break;
         case 15:
             salir=1;
         }
-
     }
-
-
 }
 
-void muestraTXTs(char arrTXTs[][20], int validos)
-{
-    for(int i=0; i<validos; i++)
-    {
-        printf("Opcion %i: %s\n", i+1, arrTXTs[i]);
-    }
-    printf("\n");
-}
-
-void preguntarIDs(int idDocs[], int* validos)
-{
-    char control = 's';
-    int i=0;
-    while(i<10 && control == 's')
-    {
-        printf("ingrese id del documento: ");
-        scanf("%i", &idDocs[i]);
-        printf("desea agregar otro ID? s/n\n");
-        fflush(stdin);
-        scanf("%c", &control);
-        i++;
-    }
-    if(i == 10)
-    {
-        printf("no se pueden agregar mas IDs\n");
-    }
-    *validos = i;
-}
-
-
-void menuVerArchivos(char archivos[][col], int validos)
+void menuVerArchivos(char archivos[][20], int validos)
 {
     printf("Seleccione el archivo que desea ver:\n");
     int seleccion,x=0;
     char* texto;
     muestraTXTs(archivos,validos);
     scanf("%i",&seleccion);
-    genArrDeUnDoc(&texto,&x, archivos[seleccion-1]);
-    printf("%s\n",texto);
-
+    if (seleccion-1<validos && seleccion-1 >=0)
+    {
+        genArrDeUnDoc(&texto,&x, archivos[seleccion-1]);
+        printf("%s\n",texto);
+    }else
+    {
+        printf("Seleccion no valida\n");
+    }
 }
 
-void menuOperacionesDeUsuario(nodoA* motor, char textos[][col],int validos)
+void menuOperacionesDeUsuario(nodoA* motor, char textos[][20],int validos)
 {
     int y,x=14,opcion,salir=0;
     char frase[100];
@@ -159,48 +128,35 @@ void menuOperacionesDeUsuario(nodoA* motor, char textos[][col],int validos)
             color(11);
             printf("Operaciones de Busqueda");
 
+            int j = 6;
+            while(j<=24)
+            {
+                color(0);
+                recuadro(14,j,40,3);
+                j+=3;
+            }
             //opciones del menu
-            gotoxy(16,7);
             color(7);
+            gotoxy(16,7);
             printf("Buscar termino en algun texto");
-            color(0);
-            recuadro(14,6,40,3);
 
             gotoxy(16,10);
-            color(7);
             printf("Buscar termino en textos selecionados");
-            color(0);
-            recuadro(14,9,40,3);
 
             gotoxy(16,13);
-            color(7);
             printf("Buscar mas de un termino");
-            color(0);
-            recuadro(14,12,40,3);
 
             gotoxy(16,16);
-            color(7);
             printf("Buscar una frase completa");
-            color(0);
-            recuadro(14,15,40,3);
 
             gotoxy(16,19);
-            color(7);
             printf("Buscar el termino de mayor frecuencia");
-            color(0);
-            recuadro(14,18,40,3);
 
             gotoxy(16,22);
-            color(7);
             printf("Sugerir terminos similares");
-            color(0);
-            recuadro(14,21,40,3);
 
             gotoxy(16,25);
-            color(7);
             printf("Volver al menu anterior");
-            color(0);
-            recuadro(14,24,40,3);
 
             //indicador del cursor de seleccion
             color(10);
@@ -272,8 +228,8 @@ void menuOperacionesDeUsuario(nodoA* motor, char textos[][col],int validos)
             if(resultado)
             {
                 printf("La frase se encontro en: \n Documento: %i \n Posicion %i\n\n",resultado->idDOC,resultado->pos);
-
-            }else
+            }
+            else
             {
                 printf("No se encontro la frase ingresada\n\n");
             }
@@ -288,14 +244,15 @@ void menuOperacionesDeUsuario(nodoA* motor, char textos[][col],int validos)
             nodoA* frecuente = palabraMayorFrecuenciaDeUnDoc(motor,id);
             if(frecuente)
             {
-               int frecuencia = frecuenciaPorDocumento(frecuente->ocurrencias,id);
-               if(frecuencia>0)
-               {
-                   printf("La palabra de mayor frecuencia del documento %i es:\n \"%s\" con %i ocurrecias\n",id,frecuente->palabra,frecuencia);
-               }else
-               {
+                int frecuencia = frecuenciaPorDocumento(frecuente->ocurrencias,id);
+                if(frecuencia>0)
+                {
+                    printf("La palabra de mayor frecuencia del documento %i es:\n \"%s\" con %i ocurrecias\n",id,frecuente->palabra,frecuencia);
+                }
+                else
+                {
                     printf("No se encontraron palabras\n");
-               }
+                }
             }
             system("pause");
             break;
@@ -309,7 +266,8 @@ void menuOperacionesDeUsuario(nodoA* motor, char textos[][col],int validos)
             if (sugerencia && Levenshtein(frase,sugerencia->palabra)<=3)
             {
                 printf("Quisiste decir \"%s\" en vez de \"%s\"?\n",sugerencia->palabra,frase);
-            }else
+            }
+            else
             {
                 printf("No se encontraron palabras similares\n");
             }
@@ -318,14 +276,116 @@ void menuOperacionesDeUsuario(nodoA* motor, char textos[][col],int validos)
         case 24:
             salir=1;
         }
-
     }
-
-
 }
 
+void menuOtros(nodoA* motor)
+{
+    int y,x=14,opcion,salir=0;
+
+    while(salir!=1)
+    {
+        y=6;
+        opcion=0;
+        system("cls");
+        while(opcion!=13)
+        {
+            color(9);
+            recuadro(14,1,27,3);
+            gotoxy(15,2);
+            color(11);
+            printf("Funciones Adicionales");
+
+            int j = 6;
+            while(j<=12)
+            {
+                color(0);
+                recuadro(14,j,27,3);
+                j+=3;
+            }
+
+            //opciones del menu
+            color(7);
+
+            gotoxy(16,7);
+            printf("Mostrar arbol de datos");
+
+            gotoxy(16,10);
+            printf("Mostrar diccionario");
+
+            gotoxy(16,13);
+            printf("Volver al menu anterior");
 
 
+            //indicador del cursor de seleccion
+            color(10);
+            recuadro(x,y,27,3);
+
+            //comportamiento de teclas
+            opcion=getch();
+            switch(opcion)
+            {
+            case 80://ABAJO
+                if(y==12)
+                    y=6;
+                else
+                    y+=3;
+                break;
+            case 72://ARRIBA
+                if(y==6)
+                    y=12;
+                else
+                    y-=3;
+                break;
+            }
+        }
+        color(7);
+        switch(y)
+        {
+        case 6:
+            system("cls");
+            mostrarArbol(motor);
+            system("pause");
+            break;
+        case 9:
+            system("cls");
+            mostrarDiccionario();
+            system("pause");
+            break;
+        case 12:
+            salir=1;
+        }
+    }
+}
+
+void muestraTXTs(char arrTXTs[][20], int validos)///mandar a libreria diccionario?
+{
+    for(int i=0; i<validos; i++)
+    {
+        printf("Opcion %i: %s\n", i+1, arrTXTs[i]);
+    }
+    printf("\n");
+}
+
+void preguntarIDs(int idDocs[], int* validos)///idem anterior
+{
+    char control = 's';
+    int i=0;
+    while(i<10 && control == 's')
+    {
+        printf("ingrese id del documento: ");
+        scanf("%i", &idDocs[i]);
+        printf("desea agregar otro ID? s/n\n");
+        fflush(stdin);
+        scanf("%c", &control);
+        i++;
+    }
+    if(i == 10)
+    {
+        printf("no se pueden agregar mas IDs\n");
+    }
+    *validos = i;
+}
 
 void color(int x)                                                               /// Cambia la combinacion de color de fondo y frente
 {
@@ -341,7 +401,6 @@ void gotoxy(int X,int Y)                                                        
     dwPos.Y=Y;
     SetConsoleCursorPosition(hcon,dwPos);
 }
-
 
 void hidecursor(int ver)                                                        /// funcion para mostrar o esconder el cursor
 {

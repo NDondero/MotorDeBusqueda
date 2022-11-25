@@ -111,7 +111,7 @@ void genArchDicc(char arrTXTs[][20], int* validosTXTs)
     }
 }
 
-void mostrarDiccionario(void)
+void mostrarDiccionario()
 {
     FILE* fp = fopen("diccionario.bin", "rb");
     termino aux;
