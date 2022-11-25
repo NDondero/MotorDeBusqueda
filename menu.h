@@ -17,8 +17,6 @@ void recuadro(int,int,int,int);
 void color(int);
 void gotoxy(int,int);
 void hidecursor(int);
-void muestraTXTs(char[][20], int);
-void preguntarIDs(int[], int*);
 void menuVerArchivos(char[][20], int);
 void menuOperacionesDeUsuario(nodoA*, char[][20],int);
 void menuOtros(nodoA*);

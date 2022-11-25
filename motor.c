@@ -33,7 +33,7 @@ nodoA* existePalabra(nodoA* motor, char* palabra)
     return NULL;
 }
 
-void insertarPalabra(nodoT** listaPalabras,int idDOC, int pos)///¡?
+void insertarPalabra(nodoT** listaPalabras,int idDOC, int pos)
 {
     nodoT* nueva = crearNodoPalabra(idDOC, pos);
     nodoT* seg, *ant;
@@ -123,8 +123,8 @@ void mostrarTermino (nodoT* lista)
 {
     while(lista)
     {
-        printf("idDoc: %i\n",lista->idDOC);
-        printf("Posicion: %i\n\n",lista->pos);
+        printf("idDoc: %i ",lista->idDOC);
+        printf("Posicion: %i\n",lista->pos);
         lista = lista->sig;
     }
 }
@@ -135,8 +135,9 @@ void mostrarArbol (nodoA* motor)
     {
         mostrarArbol(motor->izq);
         printf("Palabra: %s\n",motor->palabra);
-        printf("Frecuencia: %i\n\n",motor->frecuencia);
-        //mostrarTermino(arbol->ocurrencias);
+        printf("Frecuencia: %i\n",motor->frecuencia);
+        mostrarTermino(motor->ocurrencias);
+        printf("\n");
         mostrarArbol(motor->der);
     }
 }
