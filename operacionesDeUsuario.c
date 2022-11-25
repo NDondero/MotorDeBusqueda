@@ -31,17 +31,18 @@ void buscarTerminoEnTodosDocumentos(nodoA* motor, char* palabra, int cantIds, ch
     nodoA* nodoPalabra = existePalabra(motor,palabra);
     if(nodoPalabra)
     {
-        for(int i=0;i<cantIds;i++)
+        for(int i=0; i<cantIds; i++)
         {
-            int cant = frecuenciaPorDocumento(nodoPalabra->ocurrencias,i);
+            int cant = frecuenciaPorDocumento(nodoPalabra->ocurrencias,i+1);
             if(cant>0)
             {
-               printf("La palabra: %s, esta %i veces en el documento: %s \n",palabra,cant,textos[i]);
+                printf("La palabra: %s, esta %i veces en el documento: %s \n",palabra,cant,textos[i]);
             }
 
         }
 
-    }else
+    }
+    else
     {
         printf("No se encontro la palabra\n");
     }
@@ -70,7 +71,8 @@ void buscarTerminoEnDocumentos(nodoA* motor,char* palabra, int* idDocs, int vali
     if(flag==1)
     {
         printf("Se encontro la palabra: %s, en los documentos seleccionados\n",palabra);
-    }else
+    }
+    else
     {
         printf("No se encontro la palabra en todos o alguno de los documentos\n");
     }
@@ -116,8 +118,12 @@ void buscarTerminoEnDocumento(nodoA* motor, char* palabra, int id)
         {
             printf("La palabra: %s, esta en el documento: %i / %i veces\n",palabra,id,cant);
         }
-
-    }else
+        else
+        {
+            printf("No se encontro la palabra %s\n",palabra);
+        }
+    }
+    else
     {
         printf("No se encontro la palabra %s\n",palabra);
     }
@@ -128,7 +134,7 @@ void buscarMasDeUnTermino(nodoA* motor, char* palabras, int idDOC)
     char fraseSeparada[10][20];
     int validos = 0;
     separarFrase(fraseSeparada, palabras, &validos);
-    for(int i=0;i<validos;i++)
+    for(int i=0; i<validos; i++)
     {
         buscarTerminoEnDocumento(motor,fraseSeparada[i],idDOC);
     }

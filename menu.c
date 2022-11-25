@@ -259,13 +259,20 @@ void menuOperacionesDeUsuario(nodoA* motor, char textos[][20],int validos)
         case 21:
             system("cls");
             printf("Sugerir terminos similares\n");
-            printf("Imgrese termino: \n");
+            printf("Ingrese termino: \n");
             fflush(stdin);
             gets(frase);
             nodoA* sugerencia = sugerirPalabra(motor,frase);
             if (sugerencia && Levenshtein(frase,sugerencia->palabra)<=3)
             {
-                printf("Quisiste decir \"%s\" en vez de \"%s\"?\n",sugerencia->palabra,frase);
+                if( Levenshtein(frase,sugerencia->palabra)==0)
+                {
+                    buscarTerminoEnTodosDocumentos(motor,frase,validos,textos);
+                }else
+                {
+                    printf("Quisiste decir \"%s\" en vez de \"%s\"?\n",sugerencia->palabra,frase);
+                    buscarTerminoEnTodosDocumentos(motor,sugerencia->palabra,validos,textos);
+                }
             }
             else
             {

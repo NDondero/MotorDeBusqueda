@@ -4,10 +4,6 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-#include <string.h>
-#include <locale.h> ///ver
-#include "diccionario.h"
-#include "motor.h"
 #include "operacionesDeUsuario.h"
 
 
