@@ -18,7 +18,7 @@ void buscarMasDeUnTermino(nodoA*, char*, int);
 int ocurrenciaContigua(nodoT*, int, int, int);
 int fraseRelativaAOcurrencia(nodoA*, char[][20], int, int, int);
 nodoT* buscarFrase(nodoA*, char*);
-nodoA* palabraMayorFrecuencia(nodoA* motor);
+nodoA* palabraMayorFrecuenciaDeUnDoc(nodoA* motor, int);
 int Minimo(int, int);
 int Levenshtein(char *,char *);
 nodoA* sugerirPalabra(nodoA*, char*);
