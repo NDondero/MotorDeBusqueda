@@ -52,7 +52,7 @@ e informar cuantas veces aparece en ese documento en particular **/
 /// 2. Buscar todas las apariciones de un término en un documento y otros  (operacion and).
 void buscarTerminoEnDocumentos(nodoA* motor,char* palabra, int* idDocs, int validos)
 {
-    nodoA* nodoPalabra = buscarPalabra(motor,palabra);
+    nodoA* nodoPalabra = existePalabra(motor,palabra);
     int i=0,flag=0;
     if(nodoPalabra)
     {

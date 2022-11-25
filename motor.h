@@ -35,6 +35,6 @@ void insertarNodoYPalabra(nodoA**,termino);
 void cargaDatos(nodoA**);
 void mostrarTermino (nodoT*);
 void mostrarArbol (nodoA*);
-nodoA* buscarPalabra(nodoA*, char*);
+
 
 #endif // MOTOR_H_INCLUDED
