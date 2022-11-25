@@ -1,20 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-#include <windows.h>
-#include <string.h>
-#include "diccionario.h"
-#include "motor.h"
-#include "operacionesDeUsuario.h"
+#include "menu.h"
 
 int main()
 {
-    char arrTXTs[10][20];
-    int validosTXTs = 0;
-    genArchDicc(arrTXTs, &validosTXTs);
-    //mostrarDiccionario();
-    nodoA* motor = NULL;
-    cargaDatos(&motor);
+
+    menu();
     //mostrarArbol(motor);
 
     /*for(int i=0; i<validosTXTs; i++)
