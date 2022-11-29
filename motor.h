@@ -25,6 +25,7 @@ typedef struct nodoA
     nodoT* ocurrencias; ///ordenada por idDOC, luego por pos
     struct nodoA* der;
     struct nodoA* izq;
+    int factorBalance;
 } nodoA;
 
 nodoT* crearNodoPalabra(int, int);
@@ -35,6 +36,11 @@ void insertarNodoYPalabra(nodoA**,termino);
 void cargaDatos(nodoA**);
 void mostrarTermino (nodoT*);
 void mostrarArbol (nodoA*);
-
+int altura(nodoA*);
+nodoA* rotarSimpleDer(nodoA*, nodoA*);
+nodoA* rotarDobleDerIzq(nodoA*, nodoA*);
+nodoA* rotarSimpleIzq(nodoA*, nodoA*);
+nodoA* rotarDobleIzqDer(nodoA*, nodoA*);
+nodoA* rebalancear(nodoA* motor);
 
 #endif // MOTOR_H_INCLUDED

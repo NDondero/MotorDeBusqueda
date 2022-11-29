@@ -76,6 +76,7 @@ nodoA* crearNodoMotor (termino aux)
     nodoT* nueva = crearNodoPalabra(aux.idDOC,aux.pos);
     nuevo->ocurrencias = nueva;
     nuevo->frecuencia=1;
+    nuevo->factorBalance = 0;
     return nuevo;
 }
 
@@ -92,6 +93,14 @@ void insertarNodoYPalabra(nodoA** motor,termino aux)
     else
     {
         insertarNodoYPalabra(&((*motor)->der),aux);
+    }
+    if(*motor)
+    {
+        (*motor)->factorBalance = altura((*motor)->der) - altura((*motor)->izq);
+        if((*motor)->factorBalance < -1 || (*motor)->factorBalance > 1)
+        {
+            *motor = rebalancear(*motor);
+        }
     }
 }
 
@@ -142,3 +151,82 @@ void mostrarArbol (nodoA* motor)
     }
 }
 
+int altura(nodoA* motor)
+{
+    int altIzq, altDer;
+    if(motor)
+    {
+        altIzq = 1 + altura(motor->izq);
+        altDer = 1 + altura(motor->der);
+        if(altIzq > altDer)
+        {
+            return altIzq;
+        }
+        return altDer;
+    }
+    return 0;
+}
+
+nodoA* rotarSimpleDer(nodoA* X, nodoA* Z) // X == raiz a rotar | Z == hijo a derecha pesado a derecha
+{
+    X->der = Z->izq; // puede ser NULL o un subarbol
+    Z->izq = X; // rotacion de padre por hijo
+    X->factorBalance = altura(X->der) - altura(X->izq);
+    Z->factorBalance = altura(Z->der) - altura(Z->izq);
+    return Z; // la nueva raiz del subarbol
+}
+
+nodoA* rotarDobleDerIzq(nodoA* X, nodoA* Z) // X == raiz a rotar | Z == hijo a derecha pesado a izquierda
+{
+    nodoA* Y = Z->izq; // contiene una llave entre X y Z
+    Z->izq = Y->der; // en insercion siempre va a ser NULL // Y->der puede ser un desenlace o rotacion de llaves mayores a la futura raiz
+    Y->der = Z; // 1era rotacion
+    X->der = Y->izq; // en insercion siempre va a ser NULL // Y->izq puede ser desenlance o rotacion de llaves
+    Y->izq = X; // 2da rotacion
+    X->factorBalance = altura(X->der) - altura(X->izq);
+    Z->factorBalance = altura(Z->der) - altura(Z->izq);
+    Y->factorBalance = altura(Y->der) - altura(Y->izq);
+    return Y; // devuelve la nueva raiz
+}
+
+nodoA* rotarSimpleIzq(nodoA* Z, nodoA* X) // Z == raiz a rotar | X == hijo a izquierda pesado a izquierda
+{
+    Z->izq = X->der;
+    X->der = Z;
+    Z->factorBalance = altura(Z->der) - altura(Z->izq);
+    X->factorBalance = altura(X->der) - altura(X->izq);
+    return X;
+}
+
+nodoA* rotarDobleIzqDer(nodoA* Z, nodoA* X) // Z == raiz a rotar | X == hijo a izquierda pesado a derecha
+{
+    nodoA* Y = X->der;
+    X->der = Y->izq;
+    Y->izq = X;
+    Z->izq = Y->der;
+    Y->der = Z;
+    X->factorBalance = altura(X->der) - altura(X->izq);
+    Z->factorBalance = altura(Z->der) - altura(Z->izq);
+    Y->factorBalance = altura(Y->der) - altura(Y->izq);
+    return Y;
+}
+
+nodoA* rebalancear(nodoA* motor)
+{
+    if(motor->factorBalance > 1)
+    {
+        if(motor->der->factorBalance >= 0)
+        {
+            return rotarSimpleDer(motor, motor->der);
+        }
+        return rotarDobleDerIzq(motor, motor->der);
+    }
+    else
+    {
+        if(motor->izq->factorBalance <= 0)
+        {
+            return rotarSimpleIzq(motor, motor->izq);
+        }
+        return rotarDobleIzqDer(motor, motor->izq);
+    }
+}
