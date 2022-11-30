@@ -144,6 +144,8 @@ void mostrarArbol (nodoA* motor)
     {
         mostrarArbol(motor->izq);
         printf("Palabra: %s\n",motor->palabra);
+        printf("Altura: %i || Balance: %i\n",altura(motor), motor->factorBalance);
+        printf("Izquierda: %s || Derecha: %s\n",motor->izq->palabra, motor->der->palabra);
         printf("Frecuencia: %i\n",motor->frecuencia);
         mostrarTermino(motor->ocurrencias);
         printf("\n");
